@@ -87,7 +87,7 @@ func (q *Query) whereClause() string {
 	simpleClause("reference_bases", q.Allele)
 	// Start is inclusive, End is exclusive.  Search exactly for coordinate.
 	if q.Coord != nil {
-		add("v.start <= %d AND %d < v.end", *q.Coord, *q.Coord+1)
+		add("v.start_position <= %d AND %d <= v.end_position", *q.Coord, *q.Coord+1)
 	}
 	return strings.Join(clauses, " AND ")
 }
