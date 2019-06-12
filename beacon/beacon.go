@@ -27,7 +27,7 @@ import (
 	"strings"
 
 	"cloud.google.com/go/bigquery"
-	"github.com/googlegenomics/beacon-go/internal/variants"
+	"github.com/samesense/beacon-go/internal/variants"
 	"golang.org/x/oauth2"
 	"google.golang.org/api/option"
 	"google.golang.org/appengine"
