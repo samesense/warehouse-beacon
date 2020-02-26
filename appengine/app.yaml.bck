@@ -11,16 +11,16 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-service: beacon4
-runtime: go112
+service: beacon9
+runtime: go
 api_version: go1
 env: standard
 
 handlers:
 - url: /.*
   script: _go_app
-  #secure: always
-  #login: admin
+  secure: always
+  login: admin
 
 env_variables:
   GAE_ENV: standard
@@ -29,10 +29,10 @@ env_variables:
   AUTHENTICATION_MODE: service
 # Uncomment the following line to use the user credentials specified in the request to
 # access the datasets.
-#AUTHENTICATION_MODE: user
+#  AUTHENTICATION_MODE: user
 #
-  GOOGLE_CLOUD_PROJECT: arcus-jpe-beacon-daede2ac 
-  GOOGLE_BIGQUERY_TABLE: arcus-jpe-beacon-daede2ac.jpe_vars.vars
+  GOOGLE_CLOUD_PROJECT: arcus-jpe-beacon-4aa42c03 
+  GOOGLE_BIGQUERY_TABLE: arcus-jpe-beacon-4aa42c03.jpe_vars.varsf
 
 #network:
 #  name: "https://www.googleapis.com/compute/v1/projects/arcus-sandbox-vpc-8202a089/regions/us-central1"

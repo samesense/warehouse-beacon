@@ -1,11 +1,11 @@
-package appengine
+package main
 
 import (
 	"fmt"
 	"net/http"
 	"os"
 
-	"github.com/googlegenomics/beacon-go/beacon"
+	"github.com/samesense/beacon-go/beacon"
 )
 
 const (
@@ -13,8 +13,7 @@ const (
 	bqTable  = "GOOGLE_BIGQUERY_TABLE"
 	authMode = "AUTHENTICATION_MODE"
 )
-
-func init() {
+func main() {
 	server := beacon.Server{
 		ProjectID: os.Getenv(project),
 		TableID:   os.Getenv(bqTable),
