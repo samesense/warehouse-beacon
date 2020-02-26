@@ -1,22 +1,22 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: app-eng-hello-world
+  name: warehouse-beacon 
 spec:
   selector:
     matchLabels:
-      app: app-eng-hello-world
+      app: warehouse-beacon 
   replicas: 1
   template:
     metadata:
       labels:
-        app: app-eng-hello-world
+        app: warehouse-beacon
     spec:
       imagePullSecrets:
         - name: dibussolop-pull-secret
       containers:
         - name: hellowworld
-          image: quay.research.chop.edu/dibussolop/app-eng-hello-world
+          image: quay.research.chop.edu/evansj/warehouse-beacon
           resources:
             limits:
               cpu: "1"
@@ -30,15 +30,15 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: app-eng-hello-world-svc
+  name: warehosue-beacon-svc
   annotations:
     cloud.google.com/load-balancer-type: "Internal"
   labels:
-    app: app-eng-hello-world
+    app: warehouse-beacon 
 spec:
   type: LoadBalancer
   selector:
-    app: app-eng-hello-world
+    app: warehouse-beacon 
   ports:
   - port: 8080
     name: insecure
