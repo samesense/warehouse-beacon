@@ -12,9 +12,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 service: beacon4
-runtime: go112
+runtime: custom
 api_version: go1
-env: standard
+env: flex
 
 handlers:
 - url: /.*
@@ -31,9 +31,5 @@ env_variables:
 # access the datasets.
 #AUTHENTICATION_MODE: user
 #
-  GOOGLE_CLOUD_PROJECT: arcus-jpe-beacon-daede2ac 
-  GOOGLE_BIGQUERY_TABLE: arcus-jpe-beacon-daede2ac.jpe_vars.vars
-
-#network:
-#  name: "https://www.googleapis.com/compute/v1/projects/arcus-sandbox-vpc-8202a089/regions/us-central1"
-#  subnetwork_name: arcus-sandbox-central1
+  GOOGLE_CLOUD_PROJECT: arcus-jpe-pipe-stage-4f4279cc
+  GOOGLE_BIGQUERY_TABLE: arcus-jpe-pipe-stage-4f4279cc.cag.vars_nest

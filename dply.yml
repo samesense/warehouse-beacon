@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: app-eng-hello-world
+spec:
+  selector:
+    matchLabels:
+      app: app-eng-hello-world
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: app-eng-hello-world
+    spec:
+      imagePullSecrets:
+        - name: dibussolop-pull-secret
+      containers:
+        - name: hellowworld
+          image: quay.research.chop.edu/dibussolop/app-eng-hello-world
+          resources:
+            limits:
+              cpu: "1"
+              memory: "1Gi"
+            requests:
+              cpu: "100m"
+              memory: "100Mi"
+          ports:
+            - containerPort: 8080
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: app-eng-hello-world-svc
+  annotations:
+    cloud.google.com/load-balancer-type: "Internal"
+  labels:
+    app: app-eng-hello-world
+spec:
+  type: LoadBalancer
+  selector:
+    app: app-eng-hello-world
+  ports:
+  - port: 8080
+    name: insecure
+    targetPort: 8080
+    protocol: TCP
