@@ -48,3 +48,12 @@ Remember that you have cloned the application to your project.  You have your ow
 - This instance only has access to data in your project (not other people's projects).
 
 It is also possible to grant the application access to data within other projects.  To accomplish this, add the "App Engine Service Account" of the project in which the application is deployed (found under the "Permissions" section in the [Google Developers Console](https://console.developers.google.com)) as a member of the project that contains the data.
+
+### Cmds
+```
+kubectl apply --namespace bfx -f dply.yml
+kubectl get service app-eng-hello-world-svc --namespace bfx
+kubectl -n bfx get pods
+kubectl delete pod app-eng-hello-world-84dbcbc59d-mxpvb --namespace bfx
+kubectl delete service app-eng-hello-world-svc --namespace bfx
+```
