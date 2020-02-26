@@ -5,7 +5,7 @@ import (
 	"net/http"
 	"os"
 
-	"github.com/samesense/beacon-go/beacon"
+	"github.research.chop.edu/evansj/beacon-go/beacon"
 )
 
 const (
@@ -13,6 +13,7 @@ const (
 	bqTable  = "GOOGLE_BIGQUERY_TABLE"
 	authMode = "AUTHENTICATION_MODE"
 )
+
 func main() {
 	server := beacon.Server{
 		ProjectID: os.Getenv(project),

@@ -3,4 +3,5 @@
 FROM gcr.io/google-appengine/golang
 
 COPY ./appengine /go/src/app
+RUN go get github.research.chop.edu/evansj/warehouse-beacon
 RUN go-wrapper install -tags appenginevm
