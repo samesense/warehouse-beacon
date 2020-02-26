@@ -5,7 +5,7 @@ import (
 	"net/http"
 	"os"
 
-	"github.research.chop.edu/evansj/beacon-go/beacon"
+	"github.research.chop.edu/evansj/warehouse-beacon/beacon"
 )
 
 const (

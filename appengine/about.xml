@@ -1,5 +1,5 @@
 <beacon>
-  <id>google-beacon-go</id>
+  <id>warehouse-beacon</id>
   <name>Google Beacon API</name>
   <apiVersion>{{.APIVersion}}</apiVersion>
   <organization>Google</organization>
