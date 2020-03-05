@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"log"
 	"net/http"
 	"os"
 
@@ -15,12 +16,14 @@ const (
 )
 
 func main() {
+	log.Print("staring app")
 	server := beacon.Server{
 		ProjectID: os.Getenv(project),
 		TableID:   os.Getenv(bqTable),
 		AuthMode:  serverAuthMode(),
 	}
 
+	log.Print("made server")
 	if server.ProjectID == "" {
 		panic(fmt.Sprintf("environment variable %s must be specified", project))
 	}
