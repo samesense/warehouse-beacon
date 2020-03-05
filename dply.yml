@@ -12,10 +12,8 @@ spec:
       labels:
         app: warehouse-beacon
     spec:
-      imagePullSecrets:
-        - name: dibussolop-pull-secret
       containers:
-        - name: hellowworld
+        - name: warehouse-beacon 
           image: quay.research.chop.edu/evansj/warehouse-beacon
           resources:
             limits:
