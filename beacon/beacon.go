@@ -76,7 +76,11 @@ func (api *Server) About(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/xml")
 	
 	// write about
-	err := ioutil.WriteFile("about.xml", "<beacon>\n<id>warehouse-beacon</id>\n<name>Google Beacon API</name>\n<apiVersion>{{.APIVersion}}</apiVersion>\n<organization>Google</organization>\n<datasets>{{.TableID}}</datasets>\n</beacon>", 0644)
+	f, err := os.Create("about.xml")
+	n, err := f.WriteFile("<beacon>\n<id>warehouse-beacon</id>\n<name>Google Beacon API</name>\n<apiVersion>{{.APIVersion}}</apiVersion>\n<organization>Google</organization>\n<datasets>{{.TableID}}</datasets>\n</beacon>")
+	f.Sync()
+	f.Close()
+	
 	aboutTemplate := template.Must(template.ParseFiles("about.xml"))
 	aboutTemplate.Execute(w, map[string]string{
 		"APIVersion": beaconAPIVersion,
