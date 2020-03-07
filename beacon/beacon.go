@@ -25,7 +25,6 @@ import (
 	"net/http"
 	"strconv"
 	"strings"
-	"os"
 
 	"cloud.google.com/go/bigquery"
 	"github.com/samesense/warehouse-beacon/internal/variants"
