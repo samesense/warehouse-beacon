@@ -79,7 +79,7 @@ func (api *Server) About(w http.ResponseWriter, r *http.Request) {
 	
 	// write about
 	f, err := os.Create("about.xml")
-	n, err := f.WriteFile("<beacon>\n<id>warehouse-beacon</id>\n<name>Google Beacon API</name>\n<apiVersion>{{.APIVersion}}</apiVersion>\n<organization>Google</organization>\n<datasets>{{.TableID}}</datasets>\n</beacon>")
+	n, err := f.WriteString("<beacon>\n<id>warehouse-beacon</id>\n<name>Google Beacon API</name>\n<apiVersion>{{.APIVersion}}</apiVersion>\n<organization>Google</organization>\n<datasets>{{.TableID}}</datasets>\n</beacon>")
 	f.Sync()
 	f.Close()
 	
