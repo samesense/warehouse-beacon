@@ -25,6 +25,7 @@ import (
 	"net/http"
 	"strconv"
 	"strings"
+	"os"
 
 	"cloud.google.com/go/bigquery"
 	"github.com/samesense/warehouse-beacon/internal/variants"
@@ -34,6 +35,9 @@ import (
 )
 
 const beaconAPIVersion = "v0.0.1"
+
+// write about
+err := ioutil.WriteFile("about.xml", "<beacon>\n<id>warehouse-beacon</id>\n<name>Google Beacon API</name>\n<apiVersion>{{.APIVersion}}</apiVersion>\n<organization>Google</organization>\n<datasets>{{.TableID}}</datasets>\n</beacon>", 0644)
 
 var (
 	aboutTemplate = template.Must(template.ParseFiles("about.xml"))
