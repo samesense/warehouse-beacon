@@ -69,6 +69,13 @@ func (server *Server) Export(mux *http.ServeMux) {
 	mux.Handle("/query", &forwardOrigin{server.Query, []string{"GET", "POST"}})
 }
 
+	
+func check(e error) {
+    if e != nil {
+        panic(e)
+    }
+}
+
 // About retrieves all the necessary information on the beacon and the API.
 func (api *Server) About(w http.ResponseWriter, r *http.Request) {
 	if r.Method != "GET" {
@@ -79,7 +86,11 @@ func (api *Server) About(w http.ResponseWriter, r *http.Request) {
 	
 	// write about
 	f, err := os.Create("about.xml")
+	check(err)
 	n, err := f.WriteString("<beacon>\n<id>warehouse-beacon</id>\n<name>Google Beacon API</name>\n<apiVersion>{{.APIVersion}}</apiVersion>\n<organization>Google</organization>\n<datasets>{{.TableID}}</datasets>\n</beacon>")
+	check(err)
+	fmt.Printf("wrote %d bytes\n", n3)
+	
 	f.Sync()
 	f.Close()
 	
