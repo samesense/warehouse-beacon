@@ -89,7 +89,7 @@ func (api *Server) About(w http.ResponseWriter, r *http.Request) {
 	check(err)
 	n, err := f.WriteString("<beacon>\n<id>warehouse-beacon</id>\n<name>Google Beacon API</name>\n<apiVersion>{{.APIVersion}}</apiVersion>\n<organization>Google</organization>\n<datasets>{{.TableID}}</datasets>\n</beacon>")
 	check(err)
-	fmt.Printf("wrote %d bytes\n", n3)
+	fmt.Printf("wrote %d bytes\n", n)
 	
 	f.Sync()
 	f.Close()
