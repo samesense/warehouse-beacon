@@ -36,12 +36,7 @@ import (
 
 const beaconAPIVersion = "v0.0.1"
 
-// write about
-err := ioutil.WriteFile("about.xml", "<beacon>\n<id>warehouse-beacon</id>\n<name>Google Beacon API</name>\n<apiVersion>{{.APIVersion}}</apiVersion>\n<organization>Google</organization>\n<datasets>{{.TableID}}</datasets>\n</beacon>", 0644)
 
-var (
-	aboutTemplate = template.Must(template.ParseFiles("about.xml"))
-)
 
 // AuthenticationMode defines what authentication credentials the server uses to connect to
 // BigQuery.
@@ -80,6 +75,10 @@ func (api *Server) About(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	w.Header().Set("Content-Type", "application/xml")
+	
+	// write about
+	err := ioutil.WriteFile("about.xml", "<beacon>\n<id>warehouse-beacon</id>\n<name>Google Beacon API</name>\n<apiVersion>{{.APIVersion}}</apiVersion>\n<organization>Google</organization>\n<datasets>{{.TableID}}</datasets>\n</beacon>", 0644)
+	aboutTemplate := template.Must(template.ParseFiles("about.xml"))
 	aboutTemplate.Execute(w, map[string]string{
 		"APIVersion": beaconAPIVersion,
 		"TableID":    api.TableID,
