@@ -22,6 +22,7 @@ import (
 	"fmt"
 	"html/template"
 	"io/ioutil"
+	"log"
 	"net/http"
 	"strconv"
 	"strings"
@@ -67,6 +68,7 @@ type Server struct {
 func (server *Server) Export(mux *http.ServeMux) {
 	mux.Handle("/", &forwardOrigin{server.About, []string{"GET"}})
 	mux.Handle("/query", &forwardOrigin{server.Query, []string{"GET", "POST"}})
+	log.Print("done w/ beacon export")
 }
 
 	
