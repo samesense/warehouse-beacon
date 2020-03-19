@@ -80,6 +80,7 @@ func check(e error) {
 
 // About retrieves all the necessary information on the beacon and the API.
 func (api *Server) About(w http.ResponseWriter, r *http.Request) {
+	log.Print("start about")
 	if r.Method != "GET" {
 		http.Error(w, fmt.Sprintf("HTTP method %s not supported", r.Method), http.StatusBadRequest)
 		return
@@ -105,6 +106,7 @@ func (api *Server) About(w http.ResponseWriter, r *http.Request) {
 
 // Query retrieves whether the requested allele exists in the dataset.
 func (api *Server) Query(w http.ResponseWriter, r *http.Request) {
+	log.Print("start query")
 	query, err := parseInput(r)
 	if err != nil {
 		http.Error(w, fmt.Sprintf("parsing input: %v", err), http.StatusBadRequest)
@@ -131,7 +133,7 @@ func (api *Server) Query(w http.ResponseWriter, r *http.Request) {
 }
 
 func parseInput(r *http.Request) (*variants.Query, error) {
-
+	log.Print("start parseInput")
 	switch r.Method {
 	case "GET":
 		var query variants.Query
@@ -166,6 +168,7 @@ func parseInput(r *http.Request) (*variants.Query, error) {
 }
 
 func getFormValueInt(r *http.Request, key string) (*int64, error) {
+	log.Print("start int")
 	str := r.FormValue(key)
 	if str == "" {
 		return nil, nil
@@ -178,6 +181,7 @@ func getFormValueInt(r *http.Request, key string) (*int64, error) {
 }
 
 func writeResponse(w http.ResponseWriter, exists bool) {
+	log.Print("start response")
 	type beaconResponse struct {
 		XMLName struct{} `xml:"BEACONResponse"`
 		Exists  bool     `xml:"exists"`
@@ -197,6 +201,7 @@ type forwardOrigin struct {
 }
 
 func (f *forwardOrigin) ServeHTTP(w http.ResponseWriter, req *http.Request) {
+	log.Print("start serveHTTP")
 	if origin := req.Header.Get("Origin"); origin != "" {
 		w.Header().Set("Access-Control-Allow-Origin", origin)
 		if req.Method == "OPTIONS" {
@@ -206,9 +211,11 @@ func (f *forwardOrigin) ServeHTTP(w http.ResponseWriter, req *http.Request) {
 		}
 	}
 	f.handler(w, req)
+	log.Print("end serveHTTP")
 }
 
 func (api *Server) newBQClient(req *http.Request, projectID string) (*bigquery.Client, error) {
+	log.Print("start bqClient")
 	switch api.AuthMode {
 	case ServiceAuth:
 		return bigquery.NewClient(appengine.NewContext(req), projectID)
@@ -220,6 +227,7 @@ func (api *Server) newBQClient(req *http.Request, projectID string) (*bigquery.C
 }
 
 func newClientFromBearerToken(req *http.Request, projectID string) (*bigquery.Client, error) {
+	log.Print("start bearerToken")
 	authorization := req.Header.Get("Authorization")
 
 	fields := strings.Split(authorization, " ")
@@ -236,6 +244,6 @@ func newClientFromBearerToken(req *http.Request, projectID string) (*bigquery.Cl
 	if err != nil {
 		return nil, fmt.Errorf("creating bigquery client: %v", err)
 	}
-
+	log.Print("end token")
 	return client, nil
 }
