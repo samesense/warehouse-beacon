@@ -228,8 +228,7 @@ func (api *Server) newBQClient(req *http.Request, projectID string) (*bigquery.C
 
 func newClientFromBearerToken(req *http.Request, projectID string) (*bigquery.Client, error) {
 	log.Print("start bearerToken")
-	authorization := req.Header.Get("Authorization")
-
+	
 	client, err := bigquery.NewClient(req.Context(), projectID, option.WithCredentialsFile("sa.json"))
 	if err != nil {
 		return nil, fmt.Errorf("creating bigquery client: %v", err)
