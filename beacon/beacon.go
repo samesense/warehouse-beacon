@@ -230,17 +230,7 @@ func newClientFromBearerToken(req *http.Request, projectID string) (*bigquery.Cl
 	log.Print("start bearerToken")
 	authorization := req.Header.Get("Authorization")
 
-	fields := strings.Split(authorization, " ")
-	if len(fields) != 2 || fields[0] != "Bearer" {
-		return nil, errors.New("missing or invalid authentication token")
-	}
-
-	token := oauth2.Token{
-		TokenType:   fields[0],
-		AccessToken: fields[1],
-	}
-
-	client, err := bigquery.NewClient(req.Context(), projectID, option.WithTokenSource(oauth2.StaticTokenSource(&token)))
+	client, err := bigquery.NewClient(req.Context(), projectID, option.WithCredentialsFile("sa.json"))
 	if err != nil {
 		return nil, fmt.Errorf("creating bigquery client: %v", err)
 	}
