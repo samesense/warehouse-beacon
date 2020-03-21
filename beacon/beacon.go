@@ -228,13 +228,13 @@ func (api *Server) newBQClient(req *http.Request, projectID string) (*bigquery.C
 
 func newClientFromBearerToken(req *http.Request, projectID string) (*bigquery.Client, error) {
 	log.Print("start bearerToken")
-	f, err := os.Open("/etc/gcp/sa.json")
+	f, err := os.Open("/gcp/sa.json")
 	if err != nil {
 		return nil, fmt.Errorf("checking sa: %v", err)
 	}
 	log.Print("found sa")
 	defer f.Close()
-	client, err := bigquery.NewClient(req.Context(), projectID, option.WithCredentialsFile("/etc/gcp/sa.json"))
+	client, err := bigquery.NewClient(req.Context(), projectID, option.WithCredentialsFile("/gcp/sa.json"))
 	if err != nil {
 		return nil, fmt.Errorf("creating bigquery client: %v", err)
 	}
